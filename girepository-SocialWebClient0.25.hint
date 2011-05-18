@@ -1,0 +1,7 @@
+category: Gnome
+requires: libsocialweb-client2 girepository-GLib2.0
+external-source: libsocialweb
+sdesc: "GNOME social data client library (GObject Introspection data)"
+ldesc: "A personal social data server comprises of a core D-Bus service
+process that can load in multiple modules, and a client library."
+

@@ -1,0 +1,23 @@
+--- origsrc/libsocialweb-0.25.17/libsocialweb/sw-core.c	2011-02-22 08:03:00.000000000 -0600
++++ src/libsocialweb-0.25.17/libsocialweb/sw-core.c	2011-05-18 02:04:25.467751000 -0500
+@@ -204,7 +204,7 @@ load_modules_from_dir (SwCore *core)
+ 
+   while ((fi = g_file_enumerator_next_file (enumerator, NULL, &error)) != NULL)
+   {
+-    if (g_str_has_suffix (g_file_info_get_name (fi), ".so"))
++    if (g_str_has_suffix (g_file_info_get_name (fi), "."G_MODULE_SUFFIX))
+     {
+       char *module_path;
+ 
+@@ -280,7 +280,11 @@ load_modules_from_string (SwCore *core,
+   for (basename = modules; *basename; basename++) {
+     char *name, *path;
+ 
++#ifdef G_WITH_CYGWIN
++    name = g_strconcat ("cyg", *basename, ".dll", NULL);
++#else
+     name = g_strconcat ("lib", *basename, NULL);
++#endif
+     path = g_build_filename (SOCIALWEB_SERVICES_MODULES_DIR, name, NULL);
+ 
+     load_module (core, path);

@@ -1,0 +1,25 @@
+inherit gnome2
+
+
+PATCH_URI="
+	0.25.17-gmodule.patch
+	0.25.17-no-undefined.patch
+"
+
+PKG_NAMES="${PN} ${PN}-client2 ${PN}-devel girepository-SocialWebClient0.25 vala-${PN}-client"
+libsocialweb_client2_CONTENTS="usr/bin/cygsocialweb-client-2.dll"
+libsocialweb_CONTENTS="usr/bin/*-0.dll usr/lib/${PN}/
+                       usr/share/dbus-1/services/libsocialweb.service
+                       usr/share/doc/ usr/share/${PN}/ usr/share/locale/"
+libsocialweb_devel_CONTENTS="usr/include/ usr/lib/lib*a usr/lib/pkgconfig/
+                             usr/share/gtk-doc/"
+girepository_SocialWebClient0_25_CONTENTS="usr/*/gir*/SocialWebClient-0.25.*"
+vala_libsocialweb_client_CONTENTS="usr/share/vala/vapi/libsocialweb-client.*"
+
+DISTCLEANFILES="docs/libsocialweb-dbus/xml/ref-*"
+
+CYGCONF_ARGS="
+	--libexecdir=/usr/lib/${PN}
+	--enable-all-services
+	--enable-vala-bindings
+"

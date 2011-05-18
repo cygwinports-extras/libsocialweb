@@ -1,0 +1,7 @@
+category: Gnome
+requires: libsocialweb libsocialweb-client2 libdbus-glib_1-devel libglib2.0-devel libgnome-keyring-devel librest0.7-devel libsoup2.4-devel libsoup-gnome2.4-devel
+external-source: libsocialweb
+sdesc: "GNOME social data server and client (development)"
+ldesc: "A personal social data server comprises of a core D-Bus service
+process that can load in multiple modules, and a client library."
+

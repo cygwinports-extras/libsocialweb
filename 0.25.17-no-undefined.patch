@@ -1,0 +1,162 @@
+--- origsrc/libsocialweb-0.25.17/libsocialweb/Makefile.am	2011-05-12 13:25:53.000000000 -0500
++++ src/libsocialweb-0.25.17/libsocialweb/Makefile.am	2011-05-18 02:04:52.805314600 -0500
+@@ -13,6 +13,8 @@ libsocialweb_la_CFLAGS = -I$(top_srcdir)
+ 		     $(GCOV_CFLAGS) \
+ 		     -DSOCIALWEB_SERVICES_MODULES_DIR=\"$(servicesdir)\"
+ 
++libsocialweb_la_LDFLAGS = -no-undefined
++
+ libsocialweb_la_LIBADD = $(DBUS_GLIB_LIBS) $(SOUP_LIBS) $(SOUP_GNOME_LIBS) \
+ 		      $(NM_LIBS) $(GTK_LIBS) $(REST_LIBS) \
+ 		      $(GCOV_LDFLAGS) \
+--- origsrc/libsocialweb-0.25.17/libsocialweb-client/Makefile.am	2011-05-12 13:25:54.000000000 -0500
++++ src/libsocialweb-0.25.17/libsocialweb-client/Makefile.am	2011-05-18 02:05:06.896120500 -0500
+@@ -6,7 +6,7 @@ srcthisdir = $(top_srcdir)/libsocialweb-
+ libsocialweb_client_ladir = $(includedir)/libsocialweb/libsocialweb-client
+ libsocialweb_client_la_CFLAGS = -I$(top_srcdir) $(DBUS_GLIB_CFLAGS) $(GIO_CFLAGS) -DDATADIR="\"$(datadir)\""
+ libsocialweb_client_la_LIBADD = $(DBUS_GLIB_LIBS) $(GIO_LIBS) $(top_builddir)/interfaces/libsocialweb-bindings.la
+-libsocialweb_client_la_LDFLAGS = -version-info $(LIBSOCIALWEB_CLIENT_CURRENT):$(LIBSOCIALWEB_CLIENT_REVISION):$(LIBSOCIALWEB_CLIENT_AGE)
++libsocialweb_client_la_LDFLAGS = -no-undefined -version-info $(LIBSOCIALWEB_CLIENT_CURRENT):$(LIBSOCIALWEB_CLIENT_REVISION):$(LIBSOCIALWEB_CLIENT_AGE)
+ HANDWRITTED_H_SOURCES = sw-client.h \
+ 			      sw-item.h sw-contact.h sw-client-service.h \
+ 			      sw-client-lastfm.h \
+--- origsrc/libsocialweb-0.25.17/libsocialweb-keyfob/Makefile.am	2011-02-22 08:03:00.000000000 -0600
++++ src/libsocialweb-0.25.17/libsocialweb-keyfob/Makefile.am	2011-05-18 02:05:28.896378900 -0500
+@@ -4,6 +4,7 @@ libsocialweb_keyfob_ladir = $(pkginclude
+ libsocialweb_keyfob_la_CFLAGS = -I$(top_srcdir) \
+ 		     $(DBUS_GLIB_CFLAGS) $(KEYRING_CFLAGS) $(REST_CFLAGS)\
+ 		     $(GCOV_CFLAGS)
++libsocialweb_keyfob_la_LDFLAGS = -no-undefined
+ libsocialweb_keyfob_la_LIBADD = $(DBUS_GLIB_LIBS) $(KEYRING_LIBS) $(REST_LIBS)\
+ 				$(GCOV_LDFLAGS)
+ 
+--- origsrc/libsocialweb-0.25.17/libsocialweb-keystore/Makefile.am	2011-05-12 13:25:58.000000000 -0500
++++ src/libsocialweb-0.25.17/libsocialweb-keystore/Makefile.am	2011-05-18 02:05:44.080247300 -0500
+@@ -3,6 +3,7 @@ libsocialweb_keystore_ladir = $(pkginclu
+ 
+ libsocialweb_keystore_la_CFLAGS = -I$(top_srcdir) $(GIO_CFLAGS) -DG_LOG_DOMAIN=\"libsocialweb-keystore\"\
+ 				  $(GCOV_CFLAGS) $(KEYUTILS_CFLAGS)
++libsocialweb_keystore_la_LDFLAGS = -no-undefined
+ libsocialweb_keystore_la_LIBADD = $(GIO_LIBS) $(GCOV_LDFLAGS) $(KEYUTILS_LIBS)
+ 
+ libsocialweb_keystore_la_SOURCES = \
+--- origsrc/libsocialweb-0.25.17/services/facebook/Makefile.am	2011-05-12 13:25:54.000000000 -0500
++++ src/libsocialweb-0.25.17/services/facebook/Makefile.am	2011-05-18 02:01:06.150350700 -0500
+@@ -23,6 +23,7 @@ libfacebook_la_LIBADD = \
+ 	$(DBUS_GLIB_CFLAGS)
+ 
+ libfacebook_la_LDFLAGS = \
++	-no-undefined \
+ 	-module \
+ 	-avoid-version
+ 
+--- origsrc/libsocialweb-0.25.17/services/flickr/Makefile.am	2011-05-12 13:25:55.000000000 -0500
++++ src/libsocialweb-0.25.17/services/flickr/Makefile.am	2011-05-18 02:01:30.151723500 -0500
+@@ -18,7 +18,7 @@ libflickr_la_LIBADD = $(top_builddir)/li
+ 		      $(SOUP_LIBS) \
+ 		      $(DBUS_GLIB_LIBS) \
+ 		      $(GCOV_LDFLAGS)
+-libflickr_la_LDFLAGS = -module -avoid-version
++libflickr_la_LDFLAGS = -module -avoid-version -no-undefined
+ 
+ servicesdata_DATA = flickr.keys
+ CLEANFILES = flickr.keys
+--- origsrc/libsocialweb-0.25.17/services/lastfm/Makefile.am	2011-05-12 13:25:54.000000000 -0500
++++ src/libsocialweb-0.25.17/services/lastfm/Makefile.am	2011-05-18 02:01:36.552089500 -0500
+@@ -10,7 +10,7 @@ liblastfm_la_CFLAGS = -I$(top_srcdir) -I
+ liblastfm_la_LIBADD = $(top_builddir)/libsocialweb/libsocialweb.la $(top_builddir)/libsocialweb-keystore/libsocialweb-keystore.la \
+ 		      $(top_builddir)/interfaces/libsocialweb-ginterfaces.la $(REST_LIBS) $(KEYRING_LIBS) $(DBUS_GLIB_LIBS) \
+ 		      $(GCOV_LDFLAGS)
+-liblastfm_la_LDFLAGS = -module -avoid-version
++liblastfm_la_LDFLAGS = -module -avoid-version -no-undefined
+ 
+ dist_servicesdata_DATA = lastfm.png
+ 
+--- origsrc/libsocialweb-0.25.17/services/myspace/Makefile.am	2011-05-12 13:25:57.000000000 -0500
++++ src/libsocialweb-0.25.17/services/myspace/Makefile.am	2011-05-18 02:01:41.375365400 -0500
+@@ -17,7 +17,7 @@ libmyspace_la_LIBADD = $(top_builddir)/l
+ 		       $(KEYRING_CFLAGS) \
+ 		       $(DBUS_GLIB_LIBS) \
+ 		       $(JSON_GLIB_LIBS)
+-libmyspace_la_LDFLAGS = -module -avoid-version
++libmyspace_la_LDFLAGS = -module -avoid-version -no-undefined
+ 
+ dist_servicesdata_DATA = myspace.png
+ 
+--- origsrc/libsocialweb-0.25.17/services/photobucket/Makefile.am	2011-05-12 13:25:50.000000000 -0500
++++ src/libsocialweb-0.25.17/services/photobucket/Makefile.am	2011-05-18 02:01:46.624665700 -0500
+@@ -12,7 +12,7 @@ libphotobucket_la_LIBADD = $(top_builddi
+ 		     $(top_builddir)/libsocialweb-keyfob/libsocialweb-keyfob.la \
+ 		     $(SOUP_LIBS) $(REST_LIBS) $(KEYRING_LIBS) $(DBUS_GLIB_LIBS) \
+ 		     $(GCOV_LDFLAGS)
+-libphotobucket_la_LDFLAGS = -module -avoid-version
++libphotobucket_la_LDFLAGS = -module -avoid-version -no-undefined
+ 
+ servicesdata_DATA = photobucket.keys
+ CLEANFILES = photobucket.keys
+--- origsrc/libsocialweb-0.25.17/services/plurk/Makefile.am	2011-05-12 13:25:47.000000000 -0500
++++ src/libsocialweb-0.25.17/services/plurk/Makefile.am	2011-05-18 02:01:51.070920000 -0500
+@@ -17,7 +17,7 @@ libplurk_la_LIBADD = $(top_builddir)/lib
+ 		     $(KEYRING_LIBS) \
+ 		     $(DBUS_GLIB_LIBS) \
+ 		     $(JSON_GLIB_LIBS)
+-libplurk_la_LDFLAGS = -module -avoid-version
++libplurk_la_LDFLAGS = -module -avoid-version -no-undefined
+ 
+ dist_servicesdata_DATA = plurk.png
+ 
+--- origsrc/libsocialweb-0.25.17/services/sina/Makefile.am	2011-05-12 13:25:48.000000000 -0500
++++ src/libsocialweb-0.25.17/services/sina/Makefile.am	2011-05-18 02:01:54.623123100 -0500
+@@ -13,7 +13,7 @@ libsina_la_LIBADD = $(top_builddir)/libs
+ 		    $(top_builddir)/libsocialweb-keyfob/libsocialweb-keyfob.la \
+ 		    $(REST_LIBS) \
+ 		    $(DBUS_GLIB_LIBS)
+-libsina_la_LDFLAGS = -module -avoid-version
++libsina_la_LDFLAGS = -module -avoid-version -no-undefined
+ 
+ dist_servicesdata_DATA = sina.png
+ 
+--- origsrc/libsocialweb-0.25.17/services/smugmug/Makefile.am	2011-05-12 13:25:46.000000000 -0500
++++ src/libsocialweb-0.25.17/services/smugmug/Makefile.am	2011-05-18 02:01:58.023317600 -0500
+@@ -12,7 +12,7 @@ libsmugmug_la_LIBADD = $(top_builddir)/l
+ 		     $(top_builddir)/libsocialweb-keyfob/libsocialweb-keyfob.la \
+ 		     $(REST_LIBS) $(KEYRING_LIBS) $(DBUS_GLIB_LIBS) \
+ 		     $(GCOV_LDFLAGS)
+-libsmugmug_la_LDFLAGS = -module -avoid-version
++libsmugmug_la_LDFLAGS = -module -avoid-version -no-undefined
+ 
+ servicesdata_DATA = smugmug.keys
+ CLEANFILES = smugmug.keys
+--- origsrc/libsocialweb-0.25.17/services/twitter/Makefile.am	2011-05-12 13:25:55.000000000 -0500
++++ src/libsocialweb-0.25.17/services/twitter/Makefile.am	2011-05-18 02:02:01.400510800 -0500
+@@ -12,7 +12,7 @@ libtwitter_la_LIBADD = $(top_builddir)/l
+ 		       $(REST_LIBS) $(DBUS_GLIB_LIBS) $(KEYRING_LIBS) \
+ 		       $(JSON_GLIB_LIBS) \
+ 		       $(GCOV_LDFLAGS)
+-libtwitter_la_LDFLAGS = -module -avoid-version
++libtwitter_la_LDFLAGS = -module -avoid-version -no-undefined
+ 
+ dist_servicesdata_DATA = twitter.png
+ 
+--- origsrc/libsocialweb-0.25.17/services/vimeo/Makefile.am	2011-05-12 13:25:52.000000000 -0500
++++ src/libsocialweb-0.25.17/services/vimeo/Makefile.am	2011-05-18 02:02:04.768703400 -0500
+@@ -11,7 +11,7 @@ libvimeo_la_LIBADD = $(top_builddir)/lib
+ 		     $(top_builddir)/libsocialweb-keyfob/libsocialweb-keyfob.la \
+ 		     $(REST_LIBS) $(KEYRING_LIBS) $(DBUS_GLIB_LIBS) \
+ 		     $(GCOV_LDFLAGS)
+-libvimeo_la_LDFLAGS = -module -avoid-version
++libvimeo_la_LDFLAGS = -module -avoid-version -no-undefined
+ 
+ dist_servicesdata_DATA = vimeo.png
+ 
+--- origsrc/libsocialweb-0.25.17/services/youtube/Makefile.am	2011-05-12 13:25:47.000000000 -0500
++++ src/libsocialweb-0.25.17/services/youtube/Makefile.am	2011-05-18 02:02:08.639924900 -0500
+@@ -15,7 +15,7 @@ libyoutube_la_LIBADD = $(top_builddir)/l
+ 		       $(REST_LIBS) \
+ 		       $(KEYRING_LIBS) \
+ 		       $(DBUS_GLIB_LIBS)
+-libyoutube_la_LDFLAGS = -module -avoid-version
++libyoutube_la_LDFLAGS = -module -avoid-version -no-undefined
+ 
+ dist_servicesdata_DATA = youtube.png
+ 

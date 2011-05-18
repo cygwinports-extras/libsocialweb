@@ -1,0 +1,6 @@
+category: Gnome
+requires: libdbus-glib_1_2 libgcc1 libglib2.0_0 libgnome-keyring0 libintl8 libjson-glib1.0_0 librest0.7_0 libsoup2.4_1 libsoup-gnome2.4_1
+sdesc: "GNOME social data service"
+ldesc: "A personal social data server comprises of a core D-Bus service
+process that can load in multiple modules, and a client library."
+

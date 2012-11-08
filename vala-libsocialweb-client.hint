@@ -1,7 +1,0 @@
-category: Gnome
-requires: vala
-external-source: libsocialweb
-sdesc: "GNOME social data client library (Vala bindings)"
-ldesc: "A personal social data server comprises of a core D-Bus service
-process that can load in multiple modules, and a client library."
-

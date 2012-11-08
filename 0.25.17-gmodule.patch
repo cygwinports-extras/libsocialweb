@@ -5,19 +5,25 @@
    while ((fi = g_file_enumerator_next_file (enumerator, NULL, &error)) != NULL)
    {
 -    if (g_str_has_suffix (g_file_info_get_name (fi), ".so"))
-+    if (g_str_has_suffix (g_file_info_get_name (fi), "."G_MODULE_SUFFIX))
++    if (g_str_has_suffix (g_file_info_get_name (fi), "." G_MODULE_SUFFIX))
      {
        char *module_path;
  
-@@ -280,7 +280,11 @@ load_modules_from_string (SwCore *core,
-   for (basename = modules; *basename; basename++) {
-     char *name, *path;
+@@ -278,15 +278,13 @@ load_modules_from_string (SwCore *core,
+   modules = g_strsplit (s, ",", 0);
  
-+#ifdef G_WITH_CYGWIN
-+    name = g_strconcat ("cyg", *basename, ".dll", NULL);
-+#else
-     name = g_strconcat ("lib", *basename, NULL);
-+#endif
-     path = g_build_filename (SOCIALWEB_SERVICES_MODULES_DIR, name, NULL);
+   for (basename = modules; *basename; basename++) {
+-    char *name, *path;
++    char *path;
+ 
+-    name = g_strconcat ("lib", *basename, NULL);
+-    path = g_build_filename (SOCIALWEB_SERVICES_MODULES_DIR, name, NULL);
++    path = g_module_build_path (SOCIALWEB_SERVICES_MODULES_DIR, *basename);
  
      load_module (core, path);
+ 
+     g_free (path);
+-    g_free (name);
+   }
+ 
+   g_strfreev (modules);

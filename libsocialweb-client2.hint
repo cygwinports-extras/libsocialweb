@@ -1,7 +1,0 @@
-category: Gnome
-requires: libdbus1_3 libdbus-glib_1_2 libglib2.0_0 libsocialweb
-external-source: libsocialweb
-sdesc: "GNOME social data client library (runtime)"
-ldesc: "A personal social data server comprises of a core D-Bus service
-process that can load in multiple modules, and a client library."
-
